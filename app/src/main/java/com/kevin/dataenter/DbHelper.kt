@@ -15,22 +15,23 @@ class DbHelper(
     val TABLE_NAME = "student"
 
     override fun onCreate(p0: SQLiteDatabase?) {
-        var sql = "CREATE TABLE $TABLE_NAME(id INTEGER PRIMARY KEY AUTOINCREMENT, name TEXT, surname TEXT, std INTEGER)"
+        var sql =
+            "CREATE TABLE $TABLE_NAME(id INTEGER PRIMARY KEY AUTOINCREMENT, name TEXT, surname TEXT, std INTEGER)"
         p0?.execSQL(sql)
     }
 
     override fun onUpgrade(p0: SQLiteDatabase?, p1: Int, p2: Int) {
     }
 
-    fun addStudent(stdData : StudenModel) {
+    fun addStudent(stdData: StudenModel) {
         var db = writableDatabase
         var values = ContentValues().apply {
-            put("name",stdData.name)
-            put("surname",stdData.surname)
-            put("std",stdData.std)
+            put("name", stdData.name)
+            put("surname", stdData.surname)
+            put("std", stdData.std)
         }
-        var iss = db.insert(TABLE_NAME,null,values)
-        if (iss.toInt() == -1){
+        var iss = db.insert(TABLE_NAME, null, values)
+        if (iss.toInt() == -1) {
             Log.e(TAG, "addStudents: ===================== Data is Not Inserted")
         } else {
             Log.e(TAG, "addStudents: ===================== Data is Inserted.///////////////////////")
@@ -41,10 +42,10 @@ class DbHelper(
         var studentList = ArrayList<StudenModel>()
         var db = readableDatabase
         var sql = "SELECT * FROM $TABLE_NAME"
-        var cursor:Cursor  = db.rawQuery(sql,null)
+        var cursor: Cursor = db.rawQuery(sql, null)
         cursor.moveToFirst()
 
-        for (i in 0..cursor.count-1) {
+        for (i in 0..cursor.count - 1) {
             var id = cursor.getInt(0)
             var name = cursor.getString(1)
             var surname = cursor.getString(2)
@@ -54,5 +55,10 @@ class DbHelper(
             cursor.moveToNext()
         }
         return studentList
+    }
+
+    fun deleteStudent(id: Int) {
+        var db = writableDatabase
+        db.delete(TABLE_NAME, "id=$id", null)
     }
 }

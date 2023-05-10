@@ -1,8 +1,11 @@
 package com.kevin.dataenter
 
+import android.content.DialogInterface
+import android.content.DialogInterface.OnClickListener
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.widget.Toast
+import androidx.appcompat.app.AlertDialog
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.kevin.dataenter.Adapter.StudentAdapter
 import com.kevin.dataenter.Model.StudenModel
@@ -18,6 +21,34 @@ class MainActivity : AppCompatActivity() {
         setContentView(binding.root)
 
         dbHelper = DbHelper(this)
+        var list = dbHelper.getStudents()
+
+        adapter = StudentAdapter { id->
+
+            var dialog = AlertDialog.Builder(this)
+                .setTitle("Delete")
+                .setMessage("Are You Sure To Delete?")
+                .setPositiveButton("Yes",object : OnClickListener{
+
+                    override fun onClick(p0: DialogInterface?, p1: Int) {
+                        dbHelper.deleteStudent(id)
+                        adapter.update(dbHelper.getStudents())
+                    }
+                })
+                .setNegativeButton("No",object :OnClickListener {
+                    override fun onClick(p0: DialogInterface?, p1: Int) {
+
+                    }
+
+                })
+                .create()
+            dialog.show()
+        }
+
+        adapter.setStudents(list)
+        binding.rcvlist.layoutManager = LinearLayoutManager(this)
+        binding.rcvlist.adapter = adapter
+
         binding.btnsubmit.setOnClickListener {
 
             var name = binding.edtname.text.toString()
@@ -34,11 +65,6 @@ class MainActivity : AppCompatActivity() {
                 clearEditText()
             }
         }
-
-        var list = dbHelper.getStudents()
-        adapter = StudentAdapter(list)
-        binding.rcvlist.layoutManager = LinearLayoutManager(this)
-        binding.rcvlist.adapter = adapter
     }
 
     private fun clearEditText() {

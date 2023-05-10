@@ -3,20 +3,24 @@ package com.kevin.dataenter.Adapter
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.ImageView
 import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
 import androidx.recyclerview.widget.RecyclerView.ViewHolder
 import com.kevin.dataenter.Model.StudenModel
 import com.kevin.dataenter.R
 
-class StudentAdapter(list: ArrayList<StudenModel>) : RecyclerView.Adapter<StudentAdapter.StudentHolder>() {
+class StudentAdapter(click: (Int) -> Unit) : RecyclerView.Adapter<StudentAdapter.StudentHolder>() {
 
-    var list = list
+    var click = click
+    lateinit var list : ArrayList<StudenModel>
+
     class StudentHolder(itemView: View) : ViewHolder(itemView){
         var id = itemView.findViewById<TextView>(R.id.txtid)
         var name = itemView.findViewById<TextView>(R.id.txtname)
         var surname = itemView.findViewById<TextView>(R.id.txtsurname)
         var std = itemView.findViewById<TextView>(R.id.txtstd)
+        var delete = itemView.findViewById<ImageView>(R.id.delete)
     }
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): StudentHolder {
@@ -33,10 +37,18 @@ class StudentAdapter(list: ArrayList<StudenModel>) : RecyclerView.Adapter<Studen
         holder.name.text = list.get(position).name
         holder.surname.text = list.get(position).surname
         holder.std.text = list.get(position).std
+
+        holder.delete.setOnClickListener {
+            click.invoke(list.get(position).id)
+        }
     }
 
-    fun update(students: java.util.ArrayList<StudenModel>) {
+    fun update(students: ArrayList<StudenModel>) {
         list = students
         notifyDataSetChanged()
+    }
+
+    fun setStudents(list: ArrayList<StudenModel>) {
+        this.list = list
     }
 }
