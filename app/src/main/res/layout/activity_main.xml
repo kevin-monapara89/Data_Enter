@@ -10,12 +10,12 @@
     <TextView
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="Student Data"
         android:layout_margin="10dp"
-        android:textStyle="bold"
         android:gravity="center"
+        android:text="Student Data"
+        android:textColor="@color/black"
         android:textSize="18dp"
-        android:textColor="@color/black"/>
+        android:textStyle="bold" />
 
     <androidx.cardview.widget.CardView
         android:layout_width="match_parent"
@@ -29,9 +29,9 @@
             android:layout_width="match_parent"
             android:layout_height="50dp"
             android:background="@color/white"
-            android:padding="10dp"
             android:hint="Enter Name"
-            android:textSize="18dp"/>
+            android:padding="10dp"
+            android:textSize="18dp" />
 
     </androidx.cardview.widget.CardView>
 
@@ -42,13 +42,13 @@
         app:cardCornerRadius="8dp"
         app:cardElevation="5dp">
 
-    <EditText
-        android:id="@+id/edtsurname"
-        android:layout_width="match_parent"
-        android:layout_height="50dp"
-        android:padding="10dp"
-        android:background="@color/white"
-        android:hint="Enter Surname" />
+        <EditText
+            android:id="@+id/edtsurname"
+            android:layout_width="match_parent"
+            android:layout_height="50dp"
+            android:background="@color/white"
+            android:hint="Enter Surname"
+            android:padding="10dp" />
 
     </androidx.cardview.widget.CardView>
 
@@ -59,13 +59,13 @@
         app:cardCornerRadius="8dp"
         app:cardElevation="5dp">
 
-    <EditText
-        android:id="@+id/edtstd"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:background="@color/white"
-        android:padding="10dp"
-        android:hint="Enter STD" />
+        <EditText
+            android:id="@+id/edtstd"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="@color/white"
+            android:hint="Enter STD"
+            android:padding="10dp" />
 
     </androidx.cardview.widget.CardView>
 
@@ -75,24 +75,23 @@
         android:layout_height="wrap_content">
 
         <androidx.cardview.widget.CardView
-        android:id="@+id/btnsubmit"
-        android:layout_width="match_parent"
-        android:layout_height="45dp"
-        android:layout_margin="20dp"
-        app:cardCornerRadius="8dp"
-        app:cardElevation="7dp"
-        android:backgroundTint="#3BC341"
-        android:layout_marginTop="20dp" >
+            android:id="@+id/btnsubmit"
+            android:layout_width="match_parent"
+            android:layout_height="45dp"
+            android:layout_margin="20dp"
+            android:backgroundTint="#3BC341"
+            app:cardCornerRadius="8dp"
+            app:cardElevation="7dp">
 
             <TextView
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:gravity="center"
-            android:layout_gravity="center"
-            android:textColor="@color/white"
-            android:textSize="18dp"
-            android:textStyle="bold"
-            android:text="Add Data"/>
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:gravity="center"
+                android:text="Add Data"
+                android:textColor="@color/white"
+                android:textSize="18dp"
+                android:textStyle="bold" />
 
         </androidx.cardview.widget.CardView>
 
@@ -101,7 +100,6 @@
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/rcvlist"
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:layout_marginTop="3dp"/>
+        android:layout_height="match_parent" />
 
 </LinearLayout>
