@@ -34,7 +34,7 @@ class DbHelper(
         if (iss.toInt() == -1) {
             Log.e(TAG, "addStudents: ===================== Data is Not Inserted")
         } else {
-            Log.e(TAG, "addStudents: ===================== Data is Inserted.///////////////////////")
+            Log.e(TAG, "addStudents: ===================== Data is Inserted ================")
         }
     }
 

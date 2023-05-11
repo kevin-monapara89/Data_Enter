@@ -92,7 +92,7 @@
             android:textColor="@color/white"
             android:textSize="18dp"
             android:textStyle="bold"
-            android:text="Live Update"/>
+            android:text="Add Data"/>
 
         </androidx.cardview.widget.CardView>
 

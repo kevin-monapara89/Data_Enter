@@ -21,6 +21,7 @@ class StudentAdapter(click: (Int) -> Unit) : RecyclerView.Adapter<StudentAdapter
         var surname = itemView.findViewById<TextView>(R.id.txtsurname)
         var std = itemView.findViewById<TextView>(R.id.txtstd)
         var delete = itemView.findViewById<ImageView>(R.id.delete)
+        var update = itemView.findViewById<ImageView>(R.id.update)
     }
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): StudentHolder {
@@ -40,6 +41,10 @@ class StudentAdapter(click: (Int) -> Unit) : RecyclerView.Adapter<StudentAdapter
 
         holder.delete.setOnClickListener {
             click.invoke(list.get(position).id)
+        }
+
+        holder.update.setOnClickListener {
+
         }
     }
 

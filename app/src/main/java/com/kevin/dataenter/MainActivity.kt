@@ -23,23 +23,22 @@ class MainActivity : AppCompatActivity() {
         dbHelper = DbHelper(this)
         var list = dbHelper.getStudents()
 
-        adapter = StudentAdapter { id->
+        adapter = StudentAdapter { id ->
 
             var dialog = AlertDialog.Builder(this)
                 .setTitle("Delete")
                 .setMessage("Are You Sure To Delete?")
-                .setPositiveButton("Yes",object : OnClickListener{
+                .setPositiveButton("Yes", object : OnClickListener {
 
                     override fun onClick(p0: DialogInterface?, p1: Int) {
                         dbHelper.deleteStudent(id)
                         adapter.update(dbHelper.getStudents())
                     }
                 })
-                .setNegativeButton("No",object :OnClickListener {
+                .setNegativeButton("No", object : OnClickListener {
                     override fun onClick(p0: DialogInterface?, p1: Int) {
 
                     }
-
                 })
                 .create()
             dialog.show()
@@ -55,11 +54,11 @@ class MainActivity : AppCompatActivity() {
             var surname = binding.edtsurname.text.toString()
             var std = binding.edtstd.text.toString()
 
-            if (name.isEmpty() || surname.isEmpty() || std.isEmpty()){
+            if (name.isEmpty() || surname.isEmpty() || std.isEmpty()) {
                 Toast.makeText(this, "Please Enter Data.......", Toast.LENGTH_SHORT).show()
-            } else{
+            } else {
                 Toast.makeText(this, "Data Add Succesfullly", Toast.LENGTH_SHORT).show()
-                var data = StudenModel(0, name,  surname, std)
+                var data = StudenModel(0, name, surname, std)
                 dbHelper.addStudent(data)
                 adapter.update(dbHelper.getStudents())
                 clearEditText()
@@ -72,5 +71,4 @@ class MainActivity : AppCompatActivity() {
         binding.edtsurname.setText("")
         binding.edtstd.setText("")
     }
-
 }
