@@ -10,9 +10,10 @@ import androidx.recyclerview.widget.RecyclerView.ViewHolder
 import com.kevin.dataenter.Model.StudenModel
 import com.kevin.dataenter.R
 
-class StudentAdapter(click: (Int) -> Unit) : RecyclerView.Adapter<StudentAdapter.StudentHolder>() {
+class StudentAdapter(click: (Int) -> Unit, clickupdate:(StudenModel) -> Unit ) : RecyclerView.Adapter<StudentAdapter.StudentHolder>() {
 
     var click = click
+    var clickupdate = clickupdate
     lateinit var list : ArrayList<StudenModel>
 
     class StudentHolder(itemView: View) : ViewHolder(itemView){
@@ -44,7 +45,7 @@ class StudentAdapter(click: (Int) -> Unit) : RecyclerView.Adapter<StudentAdapter
         }
 
         holder.update.setOnClickListener {
-
+            clickupdate.invoke(list.get(position))
         }
     }
 

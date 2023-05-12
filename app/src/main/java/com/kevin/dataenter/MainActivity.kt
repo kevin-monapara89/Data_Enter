@@ -1,5 +1,6 @@
 package com.kevin.dataenter
 
+import android.app.Dialog
 import android.content.DialogInterface
 import android.content.DialogInterface.OnClickListener
 import androidx.appcompat.app.AppCompatActivity
@@ -10,9 +11,11 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import com.kevin.dataenter.Adapter.StudentAdapter
 import com.kevin.dataenter.Model.StudenModel
 import com.kevin.dataenter.databinding.ActivityMainBinding
+import com.kevin.dataenter.databinding.UpdateBinding
 
 class MainActivity : AppCompatActivity() {
     lateinit var binding: ActivityMainBinding
+    lateinit var bind: UpdateBinding
     lateinit var dbHelper: DbHelper
     lateinit var adapter: StudentAdapter
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -23,7 +26,7 @@ class MainActivity : AppCompatActivity() {
         dbHelper = DbHelper(this)
         var list = dbHelper.getStudents()
 
-        adapter = StudentAdapter { id ->
+        adapter = StudentAdapter ({ id ->
 
             var dialog = AlertDialog.Builder(this)
                 .setTitle("Delete")
@@ -42,7 +45,27 @@ class MainActivity : AppCompatActivity() {
                 })
                 .create()
             dialog.show()
-        }
+        },{
+            var dialog = Dialog(this)
+            var bind = UpdateBinding.inflate(layoutInflater)
+            dialog.setContentView(bind.root)
+
+            var id = it.id
+            bind.edtname.setText(it.name)
+            bind.edtsurname.setText(it.surname)
+            bind.edtstd.setText(it.std)
+
+            bind.btnupdate.setOnClickListener {
+                var n = bind.edtname.text.toString()
+                var sn = bind.edtname.text.toString()
+                var st = bind.edtstd.text.toString()
+                var md = StudenModel(id, n, sn, st)
+                dbHelper.updateStudent(md)
+                adapter.update(dbHelper.getStudents())
+                dialog.dismiss()
+            }
+            dialog.show()
+        })
 
         adapter.setStudents(list)
         binding.rcvlist.layoutManager = LinearLayoutManager(this)

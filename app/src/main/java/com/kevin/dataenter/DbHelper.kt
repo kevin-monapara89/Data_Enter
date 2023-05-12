@@ -38,6 +38,25 @@ class DbHelper(
         }
     }
 
+    fun updateStudent(studenModel: StudenModel) {
+        var db = writableDatabase
+        var sql = "UPDATE $TABLE_NAME SET name='${studenModel.name}', surname='${studenModel.surname}' , std='${studenModel.std}' WHERE ID='${studenModel.id}'"
+
+        Log.e(TAG, "updatestudent: Query ====== $sql")
+        var values = ContentValues().apply {
+            put("name", studenModel.name)
+            put("surname", studenModel.surname)
+            put("std", studenModel.std)
+        }
+
+        var iss = db.update(TABLE_NAME, values, "id=${studenModel.id}",null)
+        if (iss.toInt() == -1) {
+            Log.e(TAG, "updatestudent: ========== Data is not update")
+        } else {
+            Log.e(TAG, "updatestudent: ========== Data updated ==========")
+        }
+    }
+
     fun getStudents(): ArrayList<StudenModel> {
         var studentList = ArrayList<StudenModel>()
         var db = readableDatabase
